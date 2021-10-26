@@ -11,9 +11,9 @@ namespace Hb_Project.Domain.Repositories
     public interface IBaseRepository<IBaseEntity>
     {
         List<IBaseEntity> Get();
-        IBaseEntity? Get(long id);
+        IBaseEntity? Get(int id);
         bool Update(IBaseEntity entity);
         bool Add(IBaseEntity entity);
-        bool Delete(long id);
+        bool Delete(int id);
     }
 }

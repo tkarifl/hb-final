@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace Hb_Project.Domain
+namespace Hb_Project.Domain.Entities
 {
     public partial class ListItem: IBaseEntity
     {

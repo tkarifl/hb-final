@@ -1,5 +1,5 @@
 ﻿using System;
-using Hb_Project.Domain;
+using Hb_Project.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
