@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hb_Project.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace Hb_Project.Domain.Repositories
 {
-    public interface IBaseRepository<IBaseEntity>
+    public interface IBaseRepository<T>
     {
-        List<IBaseEntity> Get();
-        IBaseEntity? Get(int id);
-        bool Update(IBaseEntity entity);
-        bool Add(IBaseEntity entity);
+        List<T> Get();
+        T? Get(int id);
+        bool Update(T entity);
+        bool Add(T entity);
         bool Delete(int id);
     }
 }
