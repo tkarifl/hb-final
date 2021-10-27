@@ -13,7 +13,7 @@ namespace Hb_Project.Domain.Repositories
     {
         List<T> Get();
         T? Get(int id);
-        bool Update(T entity);
+        bool Update(int id, T entity);
         bool Add(T entity);
         bool Delete(int id);
     }

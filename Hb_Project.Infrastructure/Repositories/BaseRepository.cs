@@ -58,9 +58,9 @@ namespace Hb_Project.Infrastructure.Repositories
             return _dbSet.Find(id);
         }
 
-        public virtual bool Update(T entity)
+        public virtual bool Update(int id, T entity)
         {
-            if (!_dbSet.Any(e => e.Id == entity.Id))
+            if (id!=entity.Id||!_dbSet.Any(e => e.Id == entity.Id))
             {
                 return false;
             }
