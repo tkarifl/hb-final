@@ -1,7 +1,7 @@
 ﻿using Hb_Project.Application.Dto.Create_Update;
 using Hb_Project.Application.IServices;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,62 +9,66 @@ using System.Threading.Tasks;
 
 namespace Hb_Project.Api.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
-    public class UserController : ControllerBase
+    [ApiController]
+    public class ListController : ControllerBase
     {
-        private readonly IUserService _userService;
+        private readonly IListService _listService;
 
-        public UserController(IUserService userService)
+        public ListController(IListService listService)
         {
-            _userService = userService;
+            _listService = listService;
         }
 
         [HttpGet]
-        public IActionResult GetUsers()
+        public IActionResult GetLists()
         {
-            return Ok(_userService.Get());
+            return Ok(_listService.Get());
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetUser(int id)
+        public IActionResult GetList(int id)
         {
-            var user = _userService.Get(id);
-            if (user == null)
+            var List = _listService.Get(id);
+            if (List == null)
             {
                 return NotFound();
             }
-            return Ok(user);
+
+            return Ok(List);
         }
 
         [HttpPut("{id}")]
-        public IActionResult PutUser(int id, User_Dto_Cu dto)
+        public IActionResult PutList(int id, List_Dto_Cu dto)
         {
-            if (_userService.Update(id, dto))
+            if (_listService.Update(id, dto))
             {
                 return NoContent();
             }
+
             return BadRequest();
         }
 
         [HttpPost]
-        public IActionResult PostUser(User_Dto_Cu dto)
+        public IActionResult PostList(List_Dto_Cu dto)
         {
-            int dto_id = _userService.Add(dto);
+            int dto_id = _listService.Add(dto);
             if (dto_id != 0)
             {
-                return CreatedAtAction("GetUser", new { id = dto_id }, dto);
+                return CreatedAtAction("GetList", new { id = dto_id }, dto);
             }
+
             return BadRequest();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteUser(int id)
+        public IActionResult DeleteList(int id)
         {
-            if (_userService.Delete(id))
+            if (_listService.Delete(id))
             {
                 return NoContent();
             }
+
             return BadRequest();
         }
     }

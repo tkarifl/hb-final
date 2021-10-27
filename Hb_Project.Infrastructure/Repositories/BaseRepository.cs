@@ -25,8 +25,19 @@ namespace Hb_Project.Infrastructure.Repositories
 
         public virtual int Add(T entity)
         {
-            _dbSet.Add(entity);
-            _context.SaveChanges();
+            try
+            {
+                _dbSet.Add(entity);
+                _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return 0;
+            }
+            catch (DbUpdateException)
+            {
+                return 0;
+            }
             if (entity.Id != null)
             {
                 return (int)entity.Id;
@@ -42,9 +53,19 @@ namespace Hb_Project.Infrastructure.Repositories
                 return false;
             }
 
-            _dbSet.Remove(entity);
-            _context.SaveChanges();
-
+            try
+            {
+                _dbSet.Remove(entity);
+                _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                return false;
+            }
+            catch (DbUpdateException)
+            {
+                return false;
+            }
             return true;
         }
 
@@ -72,6 +93,10 @@ namespace Hb_Project.Infrastructure.Repositories
                 _context.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
+            {
+                return false;
+            }
+            catch (DbUpdateException)
             {
                 return false;
             }

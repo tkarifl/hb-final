@@ -1,7 +1,7 @@
 ﻿using Hb_Project.Application.Dto.Create_Update;
 using Hb_Project.Application.IServices;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,60 +11,64 @@ namespace Hb_Project.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UserController : ControllerBase
+    public class ItemController : ControllerBase
     {
-        private readonly IUserService _userService;
+        private readonly IItemService _itemService;
 
-        public UserController(IUserService userService)
+        public ItemController(IItemService itemService)
         {
-            _userService = userService;
+            _itemService = itemService;
         }
 
         [HttpGet]
-        public IActionResult GetUsers()
+        public IActionResult GetItems()
         {
-            return Ok(_userService.Get());
+            return Ok(_itemService.Get());
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetUser(int id)
+        public IActionResult GetItem(int id)
         {
-            var user = _userService.Get(id);
-            if (user == null)
+            var item = _itemService.Get(id);
+            if (item == null)
             {
                 return NotFound();
             }
-            return Ok(user);
+
+            return Ok(item);
         }
 
         [HttpPut("{id}")]
-        public IActionResult PutUser(int id, User_Dto_Cu dto)
+        public IActionResult PutItem(int id, Item_Dto_Cu dto)
         {
-            if (_userService.Update(id, dto))
+            if (_itemService.Update(id, dto))
             {
                 return NoContent();
             }
+
             return BadRequest();
         }
 
         [HttpPost]
-        public IActionResult PostUser(User_Dto_Cu dto)
+        public IActionResult PostItem(Item_Dto_Cu dto)
         {
-            int dto_id = _userService.Add(dto);
+            int dto_id = _itemService.Add(dto);
             if (dto_id != 0)
             {
-                return CreatedAtAction("GetUser", new { id = dto_id }, dto);
+                return CreatedAtAction("GetItem", new { id = dto_id }, dto);
             }
+
             return BadRequest();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteUser(int id)
+        public IActionResult DeleteItem(int id)
         {
-            if (_userService.Delete(id))
+            if (_itemService.Delete(id))
             {
                 return NoContent();
             }
+
             return BadRequest();
         }
     }
