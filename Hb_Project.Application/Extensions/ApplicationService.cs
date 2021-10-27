@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Hb_Project.Application.Extensions
 {
-     static class ApplicationService
+     public static class ApplicationService
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {

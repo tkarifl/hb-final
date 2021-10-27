@@ -21,7 +21,7 @@ namespace Hb_Project.Application.Services
             _itemRepository = itemRepository;
             _mapper = mapper;
         }
-        public bool Add(Item_Dto_Cu dto)
+        public int Add(Item_Dto_Cu dto)
         {
             return _itemRepository.Add(_mapper.Map<Item>(dto));
         }

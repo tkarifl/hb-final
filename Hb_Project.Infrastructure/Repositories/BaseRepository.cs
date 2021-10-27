@@ -23,15 +23,15 @@ namespace Hb_Project.Infrastructure.Repositories
             _dbSet = _context.Set<T>();
         }
 
-        public virtual bool Add(T entity)
+        public virtual int Add(T entity)
         {
-            if (!_dbSet.Any(e => e.Id == entity.Id))
+            _dbSet.Add(entity);
+            _context.SaveChanges();
+            if (entity.Id != null)
             {
-                _dbSet.Add(entity);
-                _context.SaveChanges();
-                return true;
+                return (int)entity.Id;
             }
-            return false;
+            return 0;
         }
 
         public virtual bool Delete(int id)
@@ -60,10 +60,11 @@ namespace Hb_Project.Infrastructure.Repositories
 
         public virtual bool Update(int id, T entity)
         {
-            if (id!=entity.Id||!_dbSet.Any(e => e.Id == entity.Id))
+            if (!_dbSet.Any(e => e.Id == id))
             {
                 return false;
             }
+            entity.Id = id;
             _context.Entry(entity).State = EntityState.Modified;
 
             try

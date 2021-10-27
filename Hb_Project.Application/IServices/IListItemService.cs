@@ -15,7 +15,7 @@ namespace Hb_Project.Application.IServices
         List<ListItem_Dto_R> Get();
         ListItem_Dto_R? Get(int id);
         bool Update(int id, ListItem_Dto_Cu dto);
-        bool Add(ListItem_Dto_Cu dto);
+        int Add(ListItem_Dto_Cu dto);
         bool Delete(int id);
     }
 }

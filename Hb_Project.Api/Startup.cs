@@ -1,3 +1,4 @@
+using Hb_Project.Application.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +29,7 @@ namespace Hb_Project.Api
         {
 
             services.AddControllers();
+            services.AddApplicationServices();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Hb_Project.Api", Version = "v1" });

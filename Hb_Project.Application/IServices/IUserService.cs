@@ -15,7 +15,7 @@ namespace Hb_Project.Application.IServices
         List<User_Dto_R> Get();
         User_Dto_R? Get(int id);
         bool Update(int id, User_Dto_Cu dto);
-        bool Add(User_Dto_Cu dto);
+        int Add(User_Dto_Cu dto);
         bool Delete(int id);
     }
 }
