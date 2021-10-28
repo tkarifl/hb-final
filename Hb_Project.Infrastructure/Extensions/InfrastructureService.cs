@@ -16,6 +16,7 @@ namespace Hb_Project.Infrastructure.Extensions
         {
             services.AddDbContext<hb_ecommerceContext>(options =>
             options.UseNpgsql(DbConnections.postreConnection));
+            services.AddScoped<IMongoRepository, MongoRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IItemRepository, ItemRepository>();
             services.AddScoped<IListRepository, ListRepository>();

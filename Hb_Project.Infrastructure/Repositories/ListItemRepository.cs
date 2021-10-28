@@ -40,7 +40,7 @@ namespace Hb_Project.Infrastructure.Repositories
         }
         public override bool Delete(int id)
         {
-            var entity = _dbSet.Find(id);
+            var entity = _dbSet.AsNoTracking().FirstOrDefault(x => id == x.Id);
             if (base.Delete(id))
             {
                 _mongoRepository.DeleteItemLog(entity.ItemId);
@@ -52,7 +52,7 @@ namespace Hb_Project.Infrastructure.Repositories
         }
         public override bool Update(int id, ListItem newEntity)
         {
-            var oldEntity = _dbSet.Find(id);
+            var oldEntity = _dbSet.AsNoTracking().FirstOrDefault(x=>id==x.Id);
             if (base.Update(id, newEntity) && oldEntity != null)
             {
                 _mongoRepository.DeleteItemLog(oldEntity.ItemId);
