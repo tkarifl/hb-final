@@ -15,7 +15,7 @@ namespace Hb_Project.Infrastructure.Extensions
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
         {
             services.AddDbContext<hb_ecommerceContext>(options =>
-            options.UseNpgsql("Host=127.0.0.1;Database=hb_ecommerce;Username=postgres;Password=12345"));
+            options.UseNpgsql(DbConnections.postreConnection));
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IItemRepository, ItemRepository>();
             services.AddScoped<IListRepository, ListRepository>();

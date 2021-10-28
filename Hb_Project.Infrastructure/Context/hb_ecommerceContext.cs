@@ -1,5 +1,6 @@
 ﻿using System;
 using Hb_Project.Domain.Entities;
+using Hb_Project.Infrastructure.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -27,7 +28,7 @@ namespace Hb_Project.Infrastructure
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql("Host=127.0.0.1;Database=hb_ecommerce;Username=postgres;Password=12345");
+                optionsBuilder.UseNpgsql(DbConnections.postreConnection);
             }
         }
 
