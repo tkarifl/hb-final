@@ -8,12 +8,19 @@ using System.Threading.Tasks;
 
 namespace Hb_Project.Domain.Entities
 {
-    public class ItemLog
+    public class UserItem
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
+        [BsonElement("listItemId")]
+        public int ListItemId { get; set; }
+        [BsonElement("userId")]
+        public int UserId { get; set; }
+        [BsonElement("listId")]
+        public int ListId { get; set; }
+        [BsonElement("itemId")]
         public int ItemId { get; set; }
-        public int count { get; set; }
+
     }
 }

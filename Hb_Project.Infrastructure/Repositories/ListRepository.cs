@@ -11,20 +11,38 @@ namespace Hb_Project.Infrastructure.Repositories
 {
     public class ListRepository : BaseRepository<List>, IListRepository
     {
-        private readonly hb_ecommerceContext _context;
+        private hb_ecommerceContext _context;
 
         public ListRepository(hb_ecommerceContext dbContext) : base(dbContext)
         {
             _context = dbContext;
         }
-        public override bool Update(int id, List newEntity)
+
+        //delete list with related entities
+        public override bool Delete(int id)
         {
-            var oldEntity = _context.Lists.AsNoTracking().FirstOrDefault(x => id == x.Id);
-            if (oldEntity != null && oldEntity.UserId == newEntity.UserId)
+            try
             {
-                return base.Update(id, newEntity);
+                var listToDelete = _context.Lists.Include(s => s.ListItems).FirstOrDefault(x => x.Id == id);
+                if (listToDelete == null)
+                    return false;
+                if (listToDelete.ListItems.Count > 0)
+                {
+                    foreach (ListItem listItem in listToDelete.ListItems)
+                    {
+                        _context.ListItems.Remove(listItem);
+                    }
+                }
+                _context.Lists.Remove(listToDelete);
+                _context.SaveChanges();
+                return true;
             }
-            return false;
+            catch (Exception ex)
+            {
+                return false;
+            }
+
         }
+
     }
 }

@@ -11,17 +11,18 @@ namespace Hb_Project.Infrastructure.Repositories
 {
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
-        private hb_ecommerceContext _dbContext;
+        private hb_ecommerceContext _context;
         public UserRepository(hb_ecommerceContext dbContext) : base(dbContext)
         {
-            _dbContext = dbContext;
+            _context = dbContext;
         }
 
+        //delete user and related entities
         public override bool Delete(int id)
         {
             try
             {
-                var userToDelete = _dbContext.Users.Include(s => s.Lists).ThenInclude(s => s.ListItems).FirstOrDefault(x => x.Id == id);
+                var userToDelete = _context.Users.Include(s => s.Lists).ThenInclude(s => s.ListItems).FirstOrDefault(x => x.Id == id);
                 if (userToDelete == null)
                     return false;
 
@@ -33,16 +34,15 @@ namespace Hb_Project.Infrastructure.Repositories
                         {
                             foreach (var userListItem in userList.ListItems)
                             {
-                                _dbContext.ListItems.Remove(userListItem);
+                                _context.ListItems.Remove(userListItem);
                             }
                         }
-                        _dbContext.Lists.Remove(userList);
+                        _context.Lists.Remove(userList);
                     }
 
                 }
-                _dbContext.Users.Remove(userToDelete);
-                _dbContext.SaveChanges();
-                //callMongoDelete;
+                _context.Users.Remove(userToDelete);
+                _context.SaveChanges();
                 return true;
             }
             catch (Exception ex)

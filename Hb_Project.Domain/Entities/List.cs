@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 
-#nullable disable
-
 namespace Hb_Project.Domain.Entities
 {
     public partial class List: IBaseEntity
@@ -13,7 +11,7 @@ namespace Hb_Project.Domain.Entities
             ListItems = new HashSet<ListItem>();
         }
 
-        public int? Id { get; set; }
+        public int Id { get; set; }
         public int UserId { get; set; }
         public string Category { get; set; }
         public string Name { get; set; }
