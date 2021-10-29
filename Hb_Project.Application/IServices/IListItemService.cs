@@ -17,5 +17,7 @@ namespace Hb_Project.Application.IServices
         bool Update(int id, ListItem_Dto_Cu dto);
         int Add(ListItem_Dto_Cu dto);
         bool Delete(int id);
+        string BulkAdd(List<ListItem_Dto_Cu> dtoList);
+        string BulkDelete(List<int> dtoList);
     }
 }

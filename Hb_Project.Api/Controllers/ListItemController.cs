@@ -71,5 +71,16 @@ namespace Hb_Project.Api.Controllers
 
             return BadRequest();
         }
+        [HttpPost("api/[controller]/bulk")]
+        public IActionResult AddBulkListItem(List<ListItem_Dto_Cu> dtoList)
+        {
+            return Ok(_listItemService.BulkAdd(dtoList));
+        }
+
+        [HttpDelete("api/[controller]/bulk")]
+        public IActionResult DeleteBulkListItem(List<int> dtoList)
+        {
+            return Ok(_listItemService.BulkDelete(dtoList));
+        }
     }
 }

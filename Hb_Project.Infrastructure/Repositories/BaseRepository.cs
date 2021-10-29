@@ -30,12 +30,14 @@ namespace Hb_Project.Infrastructure.Repositories
                 _dbSet.Add(entity);
                 _context.SaveChanges();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException ex)
             {
+                _dbSet.Remove(entity);
                 return 0;
             }
-            catch (DbUpdateException)
+            catch (DbUpdateException ex)
             {
+                _dbSet.Remove(entity);
                 return 0;
             }
             if (entity.Id != null)
