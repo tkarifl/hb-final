@@ -52,7 +52,7 @@ namespace Hb_Project.Infrastructure.Repositories
         }
         public override bool Update(int id, ListItem newEntity)
         {
-            var oldEntity = _dbSet.AsNoTracking().FirstOrDefault(x=>id==x.Id);
+            var oldEntity = _dbSet.AsNoTracking().FirstOrDefault(x => id == x.Id);
             if (base.Update(id, newEntity) && oldEntity != null)
             {
                 _mongoRepository.DeleteItemLog(oldEntity.ItemId);
