@@ -11,7 +11,7 @@ items from mongo which is not in postresql, and updates the remaining items in m
 # Notes  
 - There are 3 docker containers (the api, mongo and postresql)
 - The api doesn't allow adding <strong>same items to same list</strong>, if requested, it will simply return Badrequest response  
-- The delete requests are <strong>chained</strong>, this means if someone sends delete request to specified user, the user and  
+- The delete requests are <strong>chained</strong>, for example if someone sends delete request to specified user, the user and  
 all the related entities to the user will be deleted (etc. lists and list items which points to deleted user)  
 - Swagger dashboard is enabled in production environment (if the api is running in container, swagger  
 page still can be accessed from the container)
