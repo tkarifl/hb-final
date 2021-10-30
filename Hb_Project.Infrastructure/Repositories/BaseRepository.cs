@@ -42,9 +42,6 @@ namespace Hb_Project.Infrastructure.Repositories
         }
 
         // delete the parameter entity from db
-        // the foreign keys point to real entities and if we try to delete the entity, the db will throw exception (because the other entities
-        // still point to this entity)
-        // the foreign key exceptions are handled here, if they throw exception, it doesnt delete any entity the function simply returns false;
         public virtual bool Delete(int id)
         {
             var entity = _dbSet.Find(id);
