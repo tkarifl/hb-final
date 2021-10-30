@@ -1,5 +1,6 @@
 using Hangfire;
 using Hangfire.MemoryStorage;
+using Hb_Project.Api.Hangfire;
 using Hb_Project.Application.Extensions;
 using Hb_Project.Application.Services;
 using Microsoft.AspNetCore.Builder;
@@ -48,12 +49,9 @@ namespace Hb_Project.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Hb_Project.Api v1"));
-            }
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Hb_Project.Api v1"));
 
             app.UseHttpsRedirection();
 
@@ -65,7 +63,7 @@ namespace Hb_Project.Api
             {
                 endpoints.MapControllers();
             });
-            app.UseHangfireDashboard();
+            app.UseHangfireDashboard("/hangfire",new DashboardOptions { Authorization = new[] { new HangfireAuth() } });
             RecurringJob.AddOrUpdate<MongoService>(s => s.UpdateMongo(), Cron.Hourly);
         }
     }

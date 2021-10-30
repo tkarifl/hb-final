@@ -21,6 +21,7 @@ namespace Hb_Project.Api
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.UseUrls("http://*:5000");
                 });
     }
 }
