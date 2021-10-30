@@ -9,6 +9,7 @@ From postgresql, and updates the mongo database (adds new items from postresql, 
 items from mongo which is not in postresql, and updates the remaining items in mongo)  
 
 # Notes  
+- There are 3 docker containers (the api, mongo and postresql)
 - The api doesn't allow adding <strong>same items to same list</strong>, if requested, it will simply return Badrequest response  
 - The delete requests are <strong>chained</strong>, this means if someone sends delete request to specified user, the user and  
 all the related entities to the user will be deleted (etc. lists and list items which points to deleted user)  
