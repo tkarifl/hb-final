@@ -1,7 +1,7 @@
 # Summary  
 The Api basically takes REST requests, and process the requests to db.  
 The api/report endpoint, reports the most 10 added items, the request can be done for specified user,  
-which will report most 10 added items by the user.  
+which will report most 10 added items by the user(results are fetched from mongodb).  
 There are 2 databases, mongo and postgresql  
 There are 4 tables(on postgresql); Users, Items, ListItems and Lists  
 Api process the requests to postresql, and for every 1 hour, a background job(hangfire) fetches the current List items  
