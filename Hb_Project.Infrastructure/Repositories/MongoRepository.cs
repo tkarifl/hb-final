@@ -60,5 +60,29 @@ namespace Hb_Project.Infrastructure.Repositories
                 }
             }
         }
+        public List<Report> GetGeneralFavouriteItems()
+        {
+            var mongoItems = _userItems.Find(item => true).ToList();
+            var favouriteList = mongoItems.GroupBy(x => x.ItemId).OrderByDescending(g => g.Count()).Select(o =>
+            new Report
+            {
+                ItemId = o.Key,
+                ItemName = _context.Items.First(x => x.Id == o.Key).Name,
+                count = o.Count()
+            }).Take(10).ToList();
+            return favouriteList;
+        }
+        public List<Report> GetUserFavouriteItems(int id)
+        {
+            var mongoItems = _userItems.Find(item => item.UserId==id).ToList();
+            var favouriteList = mongoItems.GroupBy(x => x.ItemId).OrderByDescending(g => g.Count()).Select(o =>
+            new Report
+            {
+                ItemId = o.Key,
+                ItemName = _context.Items.First(x => x.Id == o.Key).Name,
+                count = o.Count()
+            }).Take(10).ToList();
+            return favouriteList;
+        }
     }
 }

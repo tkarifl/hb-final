@@ -23,6 +23,7 @@ namespace Hb_Project.Application.Extensions
             });
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
+            services.AddScoped<IMongoService, MongoService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IListService, ListService>();
             services.AddScoped<IListItemService, ListItemService>();

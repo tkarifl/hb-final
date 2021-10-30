@@ -22,6 +22,7 @@ namespace Hb_Project.Application.Mapper
             CreateMap<ListItem, ListItem_Dto_R>().ReverseMap();
             CreateMap<List, List_Dto_Cu>().ReverseMap();
             CreateMap<List, List_Dto_R>().ReverseMap();
+            CreateMap<Report, Report_Dto>().ReverseMap();
         }
     }
 }
