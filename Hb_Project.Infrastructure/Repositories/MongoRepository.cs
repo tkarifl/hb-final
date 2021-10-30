@@ -60,6 +60,8 @@ namespace Hb_Project.Infrastructure.Repositories
                 }
             }
         }
+
+        // get top 10 favourite items
         public List<Report> GetGeneralFavouriteItems()
         {
             var mongoItems = _userItems.Find(item => true).ToList();
@@ -72,6 +74,9 @@ namespace Hb_Project.Infrastructure.Repositories
             }).Take(10).ToList();
             return favouriteList;
         }
+
+        // get top 10 favourite items from specified user
+
         public List<Report> GetUserFavouriteItems(int id)
         {
             var mongoItems = _userItems.Find(item => item.UserId==id).ToList();

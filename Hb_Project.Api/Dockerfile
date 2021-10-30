@@ -9,6 +9,7 @@ COPY ["Hb_Project.Api/Hb_Project.Api.csproj", "Hb_Project.Api/"]
 COPY ["Hb_Project.Application/Hb_Project.Application.csproj", "Hb_Project.Application/"]
 COPY ["Hb_Project.Infrastructure/Hb_Project.Infrastructure.csproj", "Hb_Project.Infrastructure/"]
 COPY ["Hb_Project.Domain/Hb_Project.Domain.csproj", "Hb_Project.Domain/"]
+COPY ["Hb_Project.Test/Hb_Project.Test.csproj", "Hb_Project.Test/"]
 RUN dotnet restore "Hb_Project.Api/Hb_Project.Api.csproj"
 COPY . .
 WORKDIR "/src/Hb_Project.Api"

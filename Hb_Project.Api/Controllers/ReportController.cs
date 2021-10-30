@@ -20,11 +20,14 @@ namespace Hb_Project.Api.Controllers
             _mongoService = mongoService;
         }
 
+        // get top 10 added items from users
         [HttpGet("api/[controller]/general-favourites")]
         public IActionResult GetGeneralFavouriteItems()
         {
             return Ok(_mongoService.GetGeneralFavouriteItems());
         }
+
+        // get top 10 added items from specified user
         [HttpGet("api/[controller]/user-favourites/{id}")]
         public IActionResult GetUserFavouriteItems(int id)
         {

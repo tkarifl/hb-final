@@ -31,7 +31,6 @@ namespace Hb_Project.Infrastructure.Repositories
         //prevent putting same item to same list
         public override bool Update(int id,ListItem entity)
         {
-            _mongoRepository.UpdateMongo();
             if (!_context.ListItems.Any(listItem => entity.ListId == listItem.ListId && entity.ItemId == listItem.ItemId))
             {
                 return base.Update(id,entity);
