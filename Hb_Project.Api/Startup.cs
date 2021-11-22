@@ -1,6 +1,5 @@
 using Hangfire;
 using Hangfire.MemoryStorage;
-using Hb_Project.Api.Hangfire;
 using Hb_Project.Application.Extensions;
 using Hb_Project.Application.Services;
 using Microsoft.AspNetCore.Builder;
@@ -63,7 +62,6 @@ namespace Hb_Project.Api
             {
                 endpoints.MapControllers();
             });
-            app.UseHangfireDashboard("/hangfire",new DashboardOptions { Authorization = new[] { new HangfireAuth() } });
             RecurringJob.AddOrUpdate<MongoService>(s => s.UpdateMongo(), Cron.Hourly);
         }
     }

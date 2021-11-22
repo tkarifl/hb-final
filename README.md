@@ -1,22 +1,16 @@
-# Summary  
-The Api basically takes REST requests, and process the requests to db.  
-The api/report endpoint, reports the most 10 added items, the request can be done for specified user,  
-which will report most 10 added items by the user(results are fetched from mongodb).  
-There are 2 databases, mongo and postgresql  
-There are 4 tables(on postgresql); Users, Items, ListItems and Lists  
-Api process the requests to postresql, and for every 1 hour, a background job(hangfire) fetches the current List items  
-From postgresql, and updates the mongo database (adds new items from postresql, delete  
-items from mongo which is not in postresql, and updates the remaining items in mongo)  
+# What is this project about
+This project was a final homework for a software bootcamp.  
+Basically, the project performs some basic processes for an e-commerce application, which we can do crud operations on users, products, lists and list items.  
+The project consist of 3 docker containers (1 of them is this application, and the other two are mongodb and postresql).  
+The api takes rest requests, process crud operations to db(postgresql), report the most added items to lists (can be done for specific user too if wanted), and update mongodb from postresql.  
+The mongodb's purpose is storing logs from postgresql (list item logs) and the api will fetch these logs from the mongodb to report the most added items to lists.  
+An hangfire job (for every 1 hour), will sync the mongodb from postgresql.
 
 # Notes  
-- There are 3 docker containers (the api, mongo and postresql)
+- The project's architecture is clean architecture(onion architecture)
+- Solid principles are applied
 - The api doesn't allow adding <strong>same items to same list</strong>, if requested, it will simply return Badrequest response  
-- The delete requests are <strong>chained</strong>, for example if someone sends delete request to specified user, the user and  
-all the related entities to the user will be deleted (etc. lists and list items which points to deleted user)  
-- Swagger dashboard is enabled in production environment (if the api is running in container, swagger  
-page still can be accessed from the container)
-- Hangfire dashboard is enabled in production environment (if the api is running in container, hangfire  
-page still can be accessed from the container)
-- The reports (user favourite items and general favourite items) will fetch the items from mongodb
+- The delete requests are <strong>chained</strong>, for example if someone wants to delete specified user, the user and  
+all the related entities to the user will be deleted (etc. lists and list items which belongs to deleted user)  
 - The tables have foreign keys, when sending request make sure (if any) foreign keys points  
 to real entities, if not, api will not allow this request and returns Badrequest response
