@@ -1,4 +1,4 @@
-# What is this project about
+# The Project
 This project was final homework for a software bootcamp.  
 Basically, the project performs some basic processes for an e-commerce application, which does crud operations on users, products, lists and list items.  
 The project consist of 3 docker containers (1 of them is this application, and the other two are mongodb and postresql).  
